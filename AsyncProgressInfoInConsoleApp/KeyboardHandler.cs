@@ -20,7 +20,7 @@ internal static class KeyboardHandler
         Console.WriteLine("* The keyboard handler has been stopped.");
     }
 
-    private static bool IsCancelKeyPressed(CancellationTokenSource serviceCts)
+    private static bool IsCancelKeyPressed(CancellationTokenSource serviceCancellationTokenSource)
     {
         if (Console.KeyAvailable)
         {
@@ -28,7 +28,7 @@ internal static class KeyboardHandler
             {
                 Console.WriteLine("\n\n* The Esc-key has been pressed.");
 
-                serviceCts.Cancel();
+                serviceCancellationTokenSource.Cancel();
 
                 return true;
             }
