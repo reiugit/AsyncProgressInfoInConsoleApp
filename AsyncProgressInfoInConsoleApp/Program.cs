@@ -12,7 +12,7 @@ var heavyServiceCancellationToken = heavyServiceCancellationTokenSource.Token;
 var keyboardHandlerCancellationToken = keyboardHandlerCancellationTokenSource.Token;
 
 // start the keyboard handler
-var keyBoardHandler = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCancellationTokenSource,
+Task keyBoardHandler = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCancellationTokenSource,
                                                                         keyboardHandlerCancellationToken);
 
 // start the heavy task
