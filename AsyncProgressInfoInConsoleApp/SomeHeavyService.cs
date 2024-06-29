@@ -12,7 +12,7 @@ internal class SomeHeavyService
 
                 var progressBar = new string('=', i);
 
-                var Info = $"\r[ {progressBar,-50}]    {i * 2,3} %    {i}/{50}";
+                var Info = $"\r[{progressBar,-50}]    {i * 2,3} %    {i}/{50}";
 
                 Console.Write(Info);
             }
