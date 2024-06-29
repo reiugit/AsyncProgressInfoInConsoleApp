@@ -5,20 +5,21 @@ Console.WriteLine("the keyboard focus, when starting the application from Visual
 Console.WriteLine("In this case just click inside the console window.\n");
 Console.WriteLine("\nPress 'Esc' to cancel the task.\n");
 
-var heavyServiceCts = new CancellationTokenSource();
-var keyboardHandlerCts = new CancellationTokenSource();
+var heavyServiceCancellationTokenSource = new CancellationTokenSource();
+var keyboardHandlerCancellationTokenSource = new CancellationTokenSource();
 
-var heavyServiceCancellationToken = heavyServiceCts.Token;
-var keyboardHandlerCancellationToken = keyboardHandlerCts.Token;
+var heavyServiceCancellationToken = heavyServiceCancellationTokenSource.Token;
+var keyboardHandlerCancellationToken = keyboardHandlerCancellationTokenSource.Token;
 
 // start the keyboard handler
-var keyBoardHandler = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCts, keyboardHandlerCancellationToken);
+var keyBoardHandler = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCancellationTokenSource,
+                                                                        keyboardHandlerCancellationToken);
 
 // start the heavy task
 await SomeHeavyService.DoSomeHeavyTaskAsync(heavyServiceCancellationToken);
 
 // stop the keyboard handler
-keyboardHandlerCts.Cancel();
+keyboardHandlerCancellationTokenSource.Cancel();
 await keyBoardHandler;
 
 Console.WriteLine("\n\nPress any key to exit.");

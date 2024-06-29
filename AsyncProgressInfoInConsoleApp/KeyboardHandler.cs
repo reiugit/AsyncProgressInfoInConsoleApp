@@ -2,12 +2,13 @@
 
 internal static class KeyboardHandler
 {
-    internal static async Task CancelWhenEscapeKeyIsPressedAsync(CancellationTokenSource heavyServiceCts,
-                               CancellationToken keyboardHandlerCancellationToken)
+    internal static async Task CancelWhenEscapeKeyIsPressedAsync(
+        CancellationTokenSource heavyServiceCancellationTokenSource,
+        CancellationToken keyboardHandlerCancellationToken)
     {
         while (true)
         {
-            if (IsCancelKeyPressed(heavyServiceCts) ||
+            if (IsCancelKeyPressed(heavyServiceCancellationTokenSource) ||
                 keyboardHandlerCancellationToken.IsCancellationRequested)
             {
                 break;
