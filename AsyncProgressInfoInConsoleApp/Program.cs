@@ -12,7 +12,7 @@ var heavyServiceCancellationToken = heavyServiceCancellationTokenSource.Token;
 var keyboardHandlerCancellationToken = keyboardHandlerCancellationTokenSource.Token;
 
 // start the keyboard handler
-Task keyBoardHandler = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCancellationTokenSource,
+Task keyBoardHandlerTask = KeyboardHandler.CancelWhenEscapeKeyIsPressedAsync(heavyServiceCancellationTokenSource,
                                                                         keyboardHandlerCancellationToken);
 
 // start the heavy task
@@ -20,7 +20,7 @@ await SomeHeavyService.DoSomeHeavyTaskAsync(heavyServiceCancellationToken);
 
 // stop the keyboard handler
 keyboardHandlerCancellationTokenSource.Cancel();
-await keyBoardHandler;
+await keyBoardHandlerTask;
 
 Console.WriteLine("\n\nPress any key to exit.");
 Console.ReadKey(true);
